@@ -1,14 +1,56 @@
 {
-    "name": "domify"
-  , "version": "0.1.0"
-  , "description": "turn HTML into DOM elements"
-  , "keywords": ["dom", "html", "client", "browser", "component"]
-  , "author": "TJ Holowaychuk <tj@vision-media.ca>"
-  , "dependencies": {}
-  , "component": {
-    "scripts": {
-      "domify": "index.js"
+  "name": "element",
+  "version": "0.1.0",
+  "description": "Create's DOMElement from a string",
+  "keywords": [],
+  "author": "Raynos <raynos2@gmail.com>",
+  "repository": "git://github.com/Colingo/element.git",
+  "main": "index",
+  "homepage": "https://github.com/Colingo/elemtn",
+  "contributors": [
+    {
+      "name": "Raynos"
     }
-  }
-  , "main": "index"
+  ],
+  "bugs": {
+    "url": "https://github.com/Colingo/element/issues",
+    "email": "raynos2@gmail.com"
+  },
+  "dependencies": {
+    "global": "~2.0.1"
+  },
+  "devDependencies": {
+    "tape": "~0.3.2",
+    "browserify-server": "~2.1.18",
+    "browservefy": "https://github.com/raynos/browservefy/tarball/master",
+    "tryme": "https://github.com/raynos/tryme/tarball/master"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://github.com/Colingo/elemtn/raw/master/LICENSE"
+    }
+  ],
+  "scripts": {
+    "test": "node ./test/index.js",
+    "build-test": "browserify-server --bundle=test/index.js -o test/static/bundle.js --debug",
+    "tryme": "tryme ./examples --live",
+    "example": "browservefy ./examples/simple.js --browserify='browserify-server' --live --indexed=./examples -- --debug --bundle"
+  },
+  "testling": {
+    "files": "test/index.js",
+    "browsers": [
+      "ie/8..latest",
+      "firefox/16..latest",
+      "firefox/nightly",
+      "chrome/22..latest",
+      "chrome/canary",
+      "opera/12..latest",
+      "opera/next",
+      "safari/5.1..latest",
+      "ipad/6.0..latest",
+      "iphone/6.0..latest"
+    ]
+  },
+  "private": true
 }
