@@ -1,6 +1,6 @@
 {
   "name": "element",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Create's DOMElement from a string",
   "keywords": [],
   "author": "Raynos <raynos2@gmail.com>",
