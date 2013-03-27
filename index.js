@@ -29,25 +29,17 @@ function parse(html){
         throw new TypeError("String expected")
     }
 
-    var elements = cache[html]
+    var element = cache[html]
 
-    if (!elements) {
+    if (!element) {
         // tag name
-        elements = cache[html] = parseHtml(html)
+        element = cache[html] = parseHtml(html)
     }
 
-    var len = elements.length
-    var result = new Array(len)
-
-    for (var i = 0; i < len; i++) {
-        result[i] = elements[i].cloneNode(true)
-    }
-
-    return result
+    return element.cloneNode(true)
 }
 
 function parseHtml(html) {
-    var elements = []
     var m = /<([\w:]+)/.exec(html)
     if (!m) {
         throw new Error("No elements were generated.")
@@ -59,7 +51,7 @@ function parseHtml(html) {
     if (tag === "body") {
         el = document.createElement("html")
         el.innerHTML = html
-        elements[0] = el.removeChild(el.lastChild)
+        return el.removeChild(el.lastChild)
     } else {
         // wrap map
         var wrap = map[tag] || map._default
@@ -77,10 +69,16 @@ function parseHtml(html) {
         var nodes = el.children
         var len = nodes.length
 
-        for (var i = 0; i < len; i++) {
-            elements[i] = nodes[0]
-            el.removeChild(nodes[0])
+        if (len === 1) {
+            return el.removeChild(nodes[0])
         }
+
+        var fragment = document.createDocumentFragment()
+
+        for (var i = 0; i < len; i++) {
+            fragment.appendChild(nodes[0])
+        }
+
+        return fragment
     }
-    return elements
 }

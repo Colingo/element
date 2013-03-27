@@ -1,7 +1,7 @@
 var element = require("../index")
 
-element("<p>Hello</p><p>World</p>")[0]
-// => Hello
+element("<p>Hello</p><p>World</p>")
+// => Hello World (as document fragment)
 
-element("<p>Hello</p><p>World</p>")[1]
-// => World
+element("<p>Hello World</p>")
+// => Hello World (as element)
