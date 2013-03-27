@@ -7,8 +7,14 @@
 Turn HTML into DOM elements x-browser.
 
 ```js
-element('<p>Hello</p><p>World</p>')
-// => [<p>Hello</p><p>World</p>]
+var element = require("element")
+
+element("<p>Hello</p><p>World</p>")[0]
+// => Hello
+
+element("<p>Hello</p><p>World</p>")[1]
+// => World
+
 ```
 
 ## Installation

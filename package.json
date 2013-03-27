@@ -51,6 +51,5 @@
       "ipad/6.0..latest",
       "iphone/6.0..latest"
     ]
-  },
-  "private": true
+  }
 }
