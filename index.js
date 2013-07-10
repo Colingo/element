@@ -2,6 +2,8 @@ var document = require("global/document")
 var decode = require("ent").decode
 var LRU = require("lru-cache")
 
+var TEXT_NODE = 3
+
 /**
  * Wrap map from jquery.
  */
@@ -43,7 +45,11 @@ function parse(html){
         cache.set(html, element)
     }
 
-    return element.cloneNode(true)
+    if (element.nodeType === TEXT_NODE) {
+        return document.createTextNode(element.data)
+    } else {
+        return element.cloneNode(true)
+    }
 }
 
 function parseHtml(html) {
