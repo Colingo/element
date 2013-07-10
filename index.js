@@ -1,4 +1,6 @@
 var document = require("global/document")
+var decode = require("ent").decode
+var LRU = require("lru-cache")
 
 /**
  * Wrap map from jquery.
@@ -19,9 +21,13 @@ var map = {
     col: [2, "<table><tbody></tbody><colgroup>", "</colgroup></table>"],
     _default: [0, ", "]
 }
-var cache = {}
+var cache = LRU({
+    max: 512,
+    maxAge: 1000 * 60 * 60
+})
 
-// parse :: String -> [DOMElement]
+//  parse := (html: String) =>
+//      DOMElement | DOMTextNode | DOMDocumentFragment
 module.exports = parse
 
 function parse(html){
@@ -29,11 +35,12 @@ function parse(html){
         throw new TypeError("String expected")
     }
 
-    var element = cache[html]
+    var element = cache.get(html)
 
     if (!element) {
         // tag name
-        element = cache[html] = parseHtml(html)
+        element = parseHtml(html)
+        cache.set(html, element)
     }
 
     return element.cloneNode(true)
@@ -42,7 +49,7 @@ function parse(html){
 function parseHtml(html) {
     var m = /<([\w:]+)/.exec(html)
     if (!m) {
-        throw new Error("No elements were generated.")
+        return document.createTextNode(decode(html))
     }
     var tag = m[1]
 

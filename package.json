@@ -17,13 +17,13 @@
     "email": "raynos2@gmail.com"
   },
   "dependencies": {
-    "global": "~2.0.1"
+    "global": "~2.0.7",
+    "lru-cache": "~2.3.0",
+    "ent": "0.0.5"
   },
   "devDependencies": {
-    "tape": "~0.3.2",
-    "browserify-server": "~2.1.18",
-    "browservefy": "https://github.com/raynos/browservefy/tarball/master",
-    "tryme": "https://github.com/raynos/tryme/tarball/master"
+    "tape": "~1.0.4",
+    "browservefy": "https://github.com/raynos/browservefy/tarball/master"
   },
   "licenses": [
     {
@@ -33,8 +33,6 @@
   ],
   "scripts": {
     "test": "node ./test/index.js",
-    "build-test": "browserify-server --bundle=test/index.js -o test/static/bundle.js --debug",
-    "tryme": "tryme ./examples --live",
     "example": "browservefy ./examples/simple.js --browserify='browserify-server' --live --indexed=./examples -- --debug --bundle"
   },
   "testling": {

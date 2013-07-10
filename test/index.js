@@ -113,3 +113,12 @@ test("should not set parentElement", function(assert) {
     assert.ok(!el.parentNode);
     assert.end();
 })
+
+test("supports unicode", function (assert) {
+    var el = element("Hello &copy;")
+    console.log("el?", el)
+    assert.equal(el.data, "Hello ©")
+    assert.ok(!el.tagName)
+
+    assert.end()
+})
